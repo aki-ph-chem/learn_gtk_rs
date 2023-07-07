@@ -4,9 +4,17 @@
   <requires lib="gtk+" version="3.24"/>
   <object class="GtkWindow" id="window_1">
     <property name="can-focus">False</property>
-    <property name="title" translatable="yes">Hello World</property>
+    <property name="window-position">center</property>
     <child>
-      <placeholder/>
+      <object class="GtkLabel" id="label_1">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="label" translatable="yes">Hello World</property>
+        <property name="width-chars">10</property>
+        <property name="max-width-chars">10</property>
+        <property name="xalign">0.47999998927116394</property>
+        <property name="yalign">0.49000000953674316</property>
+      </object>
     </child>
   </object>
 </interface>
