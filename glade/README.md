@@ -24,3 +24,29 @@ let window: gtk::Window = builder.object("window_1").expect("Error: window_1");
 このBuilderを用いて`gtk::Window`のインスタンスを生成する。
 
 この処理が終われば以降はコードで記述していた場合と同じように開発を進める。
+
+```Rust
+extern crate gtk;
+use gtk::prelude::*;
+use std::error::Error;
+
+fn main() -> Result<(), Box<dyn Error>> {
+    gtk::init()?;
+
+    let ui = include_str!("ui/hello.ui");
+    let builder = gtk::Builder::from_string(ui);
+
+    let window: gtk::Window = builder.object("window_1").expect("Error: window_1");
+    window.connect_delete_event(move |_,_| {
+        gtk::main_quit();
+        Inhibit(false)
+    });
+
+    window.show_all();
+    gtk::main();
+
+    Ok(())
+}
+```
+
+ss1でやっていたようにウィジェットを追加したり、コンテナをネストしたりするのは、GladeのUI制作画面から行えば良い。
