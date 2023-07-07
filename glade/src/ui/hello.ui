@@ -24,7 +24,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkBox" id="entry">
+          <object class="GtkBox" id="hbox">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="margin-left">28</property>
@@ -36,7 +36,7 @@
               <placeholder/>
             </child>
             <child>
-              <object class="GtkEntry">
+              <object class="GtkEntry" id="entry">
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
               </object>

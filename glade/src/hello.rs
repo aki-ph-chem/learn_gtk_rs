@@ -14,6 +14,12 @@ fn main() -> Result<(), Box<dyn Error>> {
         Inhibit(false)
     });
 
+    let button: gtk::Button = builder.object("button").expect("Error: button"); 
+    let entry: gtk::Entry = builder.object("entry").expect("Error: entry");
+    button.connect_clicked(move |_| {
+        println!("Text: {}", entry.text());
+    });
+
     window.show_all();
     gtk::main();
 
