@@ -50,3 +50,46 @@ fn main() -> Result<(), Box<dyn Error>> {
 ```
 
 ss1でやっていたようにウィジェットを追加したり、コンテナをネストしたりするのは、GladeのUI制作画面から行えば良い。
+
+## Gladeで作ったUIにイベントハンドラを実装する
+
+ただUIを実装して表示するだけならば、ネストされているウィジェットのうちToplevelの`gtk::Window`のみを`gtk::Builder()`で生成すれば良い。
+しかし、`gtk::Button`や`gtk::Entry`のイベントをハンドリングするためにはそれぞれのインスタンスを生成する必要がある。
+
+これを行うには`gtk::Window`を生成すると処理と同じように書けば良い。
+
+```Rust
+let button: gtk::Button = builder.object("button").expect("Error: button"); 
+let entry: gtk::Entry = builder.object("entry").expect("Error: entry");
+```
+button,entryをイベントと関連付けるにはss2で書いたのと同じようにすれば良い。
+
+```Rust
+extern crate gtk;
+use gtk::prelude::*;
+use std::error::Error;
+
+fn main() -> Result<(), Box<dyn Error>> {
+    gtk::init()?;
+
+    let ui = include_str!("ui/hello.ui");
+    let builder = gtk::Builder::from_string(ui);
+
+    let window: gtk::Window = builder.object("window_1").expect("Error: window_1");
+    window.connect_delete_event(move |_,_| {
+        gtk::main_quit();
+        Inhibit(false)
+    });
+
+    let button: gtk::Button = builder.object("button").expect("Error: button"); 
+    let entry: gtk::Entry = builder.object("entry").expect("Error: entry");
+    button.connect_clicked(move |_| {
+        println!("Text: {}", entry.text());
+    });
+
+    window.show_all();
+    gtk::main();
+
+    Ok(())
+}
+```
