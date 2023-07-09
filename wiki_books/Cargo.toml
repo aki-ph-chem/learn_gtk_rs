@@ -1,0 +1,13 @@
+[package]
+name = "wiki_books"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[[bin]]
+name = "gtk_1"
+path = "src/gtk_1.rs"
+
+[dependencies]
+gtk = "0.17.1"
