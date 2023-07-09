@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.40.0 -->
+<interface>
+  <requires lib="gtk+" version="3.24"/>
+  <object class="GtkWindow" id="window_1">
+    <property name="can-focus">False</property>
+    <property name="default-width">900</property>
+    <property name="default-height">450</property>
+    <child>
+      <object class="GtkLabel" id="label_1">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="angle">0.01</property>
+        <property name="xalign">0.47999998927116394</property>
+        <property name="yalign">0.47999998927116394</property>
+        <attributes>
+          <attribute name="font-desc" value="P052 Bold Italic 35"/>
+          <attribute name="style" value="italic"/>
+        </attributes>
+      </object>
+    </child>
+  </object>
+</interface>
