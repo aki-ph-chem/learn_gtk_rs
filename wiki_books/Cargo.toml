@@ -25,5 +25,9 @@ path = "src/gtk_2f.rs"
 name = "gtk_3"
 path = "src/gtk_3.rs"
 
+[[bin]]
+name = "gtk_3f"
+path = "src/gtk_3f.rs"
+
 [dependencies]
 gtk = "0.17.1"
