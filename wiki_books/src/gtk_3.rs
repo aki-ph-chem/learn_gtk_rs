@@ -9,8 +9,7 @@ fn main() -> Result<(),Box<dyn Error>> {
     let ui = include_str!("ui/gtk_3.ui");
     let builder = gtk::Builder::from_string(ui);
     let window: gtk::Window = builder.object("window_1").expect("Error: window_1");
-    let window_ = window.clone();
-    window_.connect_delete_event(move |_,_| {
+    window.connect_delete_event(move |_,_| {
         gtk::main_quit();
         Inhibit(false)
     });
@@ -29,15 +28,16 @@ fn main() -> Result<(),Box<dyn Error>> {
     let about_dialog: gtk::AboutDialog = builder.object("about_dialog")
         .expect("Error: about_dialog");
 
+    let window_ = window.clone();
     about.connect_activate(move |_|{
         about_dialog.set_title("About");
 
         about_dialog.set_authors(&["Aki"]);
-        about_dialog.set_transient_for(Some(&window));
+        about_dialog.set_transient_for(Some(&window_));
         about_dialog.show_all();
     });
 
-    window_.show_all();
+    window.show_all();
     gtk::main();
 
     Ok(())
