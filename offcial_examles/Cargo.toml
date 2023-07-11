@@ -9,5 +9,9 @@ edition = "2021"
 name = "button_inc"
 path = "src/button_inc.rs"
 
+[[bin]]
+name = "grid"
+path = "src/grid.rs"
+
 [dependencies]
 gtk = "0.17.1"
