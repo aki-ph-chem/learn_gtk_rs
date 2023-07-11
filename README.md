@@ -27,6 +27,13 @@ RustのGUIフレームワークであるgtk-rsを学ぶことを目的として�
 1. wikibooks: https://ja.wikibooks.org/wiki/GTK%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0
 2. ZetCode: https://zetcode.com/gui/gtk2/ 
 
+## gtk3-rsのexamplesのコードをいじる
+
+### [official_examples](./offcial_examles)
+
+### 参考
+- gtk3-rsの公式リポジトリ: https://github.com/gtk-rs/gtk3-rs/tree/master/examples 
+
 
 ## ライセンス
 
