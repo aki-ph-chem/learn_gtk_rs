@@ -154,3 +154,33 @@ button.connect_clicked(clone!(windows => move |_| {
 
 ### 参考
 - Callbacks and closures: https://martinber.github.io/gtk-rs.github.io/docs-src/tutorial/closures 
+
+##  Upcastとdowncast
+
+### Upcasting
+
+Gtkには継承システムが存在するため、`Gtk-rs`にも当然存在する。多くの人々は通常必要としないであろうが、仕組みを理解しておくことは重要である。
+
+Upcastingはシンプルで以下のように書く
+
+```Rust
+let button = gtk::Button::new_with_label("Click me!");
+let widget = button.upcast::<gtk::Widget>();
+```
+
+ここで、構造体`Button`はトレイト`IsA<Widget>`を実装しているため、構造体`Widget`にキャストすること(upcast)が可能である。
+ここで、トレイト`IsA`は全てのwidgetとその親オブジェクトに実装されている、そのためここでは`Button`から`Widget`へのupcastが可能となった。
+
+## widgetが別のwidgetかどうかのチェック
+
+チェックの例として、`Widget`が`Box`であるかを判定する例を考える。
+その場合、以下のようなジェネリックな関数を考える。
+
+```Rust
+fn is_a_box<W: IsA<gtk::Object> + IsA<gtk::Widget> + Clone>(widget: &W) -> bool {
+    widget.clone().upcast::<gtk::Widget>().is::<gtk::Box>()
+}
+```
+
+### 参考
+- Upcast and downcast: https://martinber.github.io/gtk-rs.github.io/docs-src/tutorial/upcast_downcast 
