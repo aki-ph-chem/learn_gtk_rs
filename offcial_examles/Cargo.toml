@@ -17,5 +17,9 @@ path = "src/grid.rs"
 name = "use_clone"
 path = "src/use_clone.rs"
 
+[[bin]]
+name = "refcell_rc"
+path = "src/refcell_rc.rs"
+
 [dependencies]
 gtk = "0.17.1"
