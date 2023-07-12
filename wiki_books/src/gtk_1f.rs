@@ -8,11 +8,6 @@ fn build_ui(app: &gtk::Application) {
         .expect("Error: window_1");
     window.set_application(Some(app));
 
-    window.connect_delete_event(move |_,_| {
-        gtk::main_quit();
-        Inhibit(false)
-    });
-
     window.show_all();
 }
 
