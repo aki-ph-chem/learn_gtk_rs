@@ -21,5 +21,9 @@ path = "src/use_clone.rs"
 name = "refcell_rc"
 path = "src/refcell_rc.rs"
 
+[[bin]]
+name = "file_chose"
+path = "src/file_chose.rs"
+
 [dependencies]
 gtk = "0.17.1"
