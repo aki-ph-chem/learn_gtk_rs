@@ -17,7 +17,8 @@ fn build_ui(app: &gtk::Application) {
     // File/Openのクリックでファイル選択ダイアログを表示
     let file_chose_dialog: gtk::FileChooserDialog = builder
         .object("chose_file_dialog").expect("Error: chose_file_dialog");
-    file_chose.connect_activate(glib::clone!(@weak window => move |_| {
+    file_chose.connect_activate(glib::clone!(@weak window, @weak file_chose_dialog => move |_| {
+
         file_chose_dialog.set_title("open file");
 
         file_chose_dialog.set_transient_for(Some(&window));
@@ -28,9 +29,19 @@ fn build_ui(app: &gtk::Application) {
     // open_button
     let open_button: gtk::Button = builder.object("open_button")
         .expect("Error: open_button"); 
+    open_button.connect_clicked(glib::clone!(@weak file_chose_dialog => move |_| {
+        file_chose_dialog.set_response_sensitive(gtk::ResponseType::Ok, true);
+    }));
+
     // cancel_button
     let cancel_button: gtk::Button = builder.object("cancel_button")
         .expect("Error: cancel_button"); 
+    cancel_button.connect_clicked(glib::clone!(@weak file_chose_dialog => move |_| {
+        file_chose_dialog.set_response_sensitive(gtk::ResponseType::Cancel, true);
+    }));
+
+    // open_button, cancle_buttonがクリックされた時の挙動
+    // file_chose_dialog.connect_response() 
 
     window.show_all();
 }
