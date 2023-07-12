@@ -34,7 +34,8 @@ fn main() -> Result<(),Box<dyn Error>> {
 
         about_dialog.set_authors(&["Aki"]);
         about_dialog.set_transient_for(Some(&window_));
-        about_dialog.show_all();
+        about_dialog.run();
+        about_dialog.hide();
     });
 
     window.show_all();
