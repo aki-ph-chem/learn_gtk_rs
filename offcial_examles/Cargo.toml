@@ -13,5 +13,9 @@ path = "src/button_inc.rs"
 name = "grid"
 path = "src/grid.rs"
 
+[[bin]]
+name = "use_clone"
+path = "src/use_clone.rs"
+
 [dependencies]
 gtk = "0.17.1"
