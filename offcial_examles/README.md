@@ -215,3 +215,78 @@ fn test_is_a() {
 
 ### 参考
 - Upcast and downcast: https://martinber.github.io/gtk-rs.github.io/docs-src/tutorial/upcast_downcast 
+
+## Gladeの利用
+
+### about Glade
+
+Gladeは容易に`Gtk`アプリケーションのUIを開発を可能にするツールである。
+設計されたUIはxmlファイルとして出力され、それを読み込んでUIの構築を行う。
+
+### 例
+
+Gladeを使って`gtk::Window`,`Gtk::Button`を含むUIを設計したとする。また、メッセージを含んでいる`gtk::MessageDialog`と`gtk::Label`も含まれているとする。
+
+生成されたxmlファイルが`basic.ui`であったとする。このときこのファイルを読込み、
+UIを構築する起点となる`gtk::Builder`のインスタンスを生成するには以下のコードを書けば良い。
+
+```Rust
+// First we get the file content.
+let glade_src = include_str!("builder_basics.glade");
+// Then we call the Builder call.
+let builder = gtk::Builder::new_from_string(glade_src);
+```
+
+ここで`indluce_str!()`マクロはコンパイル時にファイルを読込みString型を返す。
+
+builderから`gtk::Window`のインスタンスを生成するためには`get_object()`メソッドを用いる、引数にはGladeでUIを設計したときに割り振ったIDを&str型としてを与える
+
+```Rust
+// Our window id is "window1".
+let window: gtk::Window = builder.get_object("window1").unwrap();
+window.show_all();
+```
+
+次にシグナルのハンドリングについて考えよう。
+ここではボタン(`gtk::Button`)をクリックするイベントによってメッセージダイアログ(`gtk::MessageDialog`)が表示される例を考える。
+ボタンのクリックのイベントを拾えばいいので、`connect_clicked()`メソッドを用いて以下のように実装する。
+
+```Rust
+let button: gtk::Button = builder.get_object("button1").unwrap();
+let dialog: gtk::MessageDialog = builder.get_object("messagedialog1").unwrap();
+
+button.connect_clicked(move |_| {
+    // We make the dialog window blocks all other windows.
+    dialog.run();
+    // When it finished running, we hide it again.
+    dialog.hide();
+});
+```
+
+最後にコード全体を示す。
+
+```Rust
+fn main() {
+    gtk::init().expect("Failed to initilize GTK"); 
+
+    let glade_src = include_str!("builder_basics.glade");
+    let builder = gtk::Builder::new_from_string(glade_src);
+
+    let window: gtk::Window = builder.get_object("window1").unwrap();
+    let button: gtk::Button = builder.get_object("button1").unwrap();
+    let dialog: gtk::MessageDialog = builder.get_object("messagedialog1").unwrap();
+
+    button.connect_clicked(move |_| {
+            dialog.run();
+            dialog.hide();
+            });
+
+    window.show_all();
+
+    gtk::main();
+}
+```
+
+
+### 参考
+- Glade: https://martinber.github.io/gtk-rs.github.io/docs-src/tutorial/glade
