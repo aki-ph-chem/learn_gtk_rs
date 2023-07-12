@@ -9,10 +9,6 @@ fn build_ui(app: &gtk::Application) {
         .expect("Error: window_1");
 
     window.set_application(Some(app));
-    window.connect_delete_event(move |_,_| {
-        gtk::main_quit();
-        Inhibit(false)
-    });
 
     // File/Quitをクリックでプログラムを終了
     let quit: gtk::MenuItem = builder.object("quit")
@@ -32,7 +28,8 @@ fn build_ui(app: &gtk::Application) {
         about_dialog.set_authors(&["Aki"]);
         about_dialog.set_title("About");
         about_dialog.set_transient_for(Some(&window_));
-        about_dialog.show_all();
+        about_dialog.run();
+        about_dialog.hide();
     });
 
     window.show_all();
