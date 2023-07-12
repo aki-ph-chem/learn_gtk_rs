@@ -174,12 +174,43 @@ let widget = button.upcast::<gtk::Widget>();
 ## widgetが別のwidgetかどうかのチェック
 
 チェックの例として、`Widget`が`Box`であるかを判定する例を考える。
-その場合、以下のようなジェネリックな関数を考える。
+その場合、以下のようなジェネリックな関数を考えればよい。
 
 ```Rust
 fn is_a_box<W: IsA<gtk::Object> + IsA<gtk::Widget> + Clone>(widget: &W) -> bool {
     widget.clone().upcast::<gtk::Widget>().is::<gtk::Box>()
 }
+```
+
+この関数が何をしているかを考えてみよう。
+引数のwidgetはトレイト境界にもある通り、`IsA<gtk::Widget>`,`IsA<gtk::Object>`を実装していることが要求される。
+また、`gtk::Object`には`Cast`トレイトが実装されていてメソッド`upcast()`,`downcast`が呼び出し可能であることも要求する。
+
+実際では、widgetに対して`IsA<gtk::Widget>`をトレイト境界に要求することは必要ではないが、問題を単純化するために(`gtk::Widget`への`upcast`がトラブルなく行えることを目的に)要求している。
+
+関数の実装のポイントはwidgetをより高階層のオブジェクトにupcastして、判定したオブジェクトにdowncastしている点である。
+
+よりジェネリックにしたバージョンは以下のように実装できる。
+
+```Rust
+fn is_a<W: IsA<gtk::Object> + IsA<gtk::Widget> + Clone,
+        T: IsA<gtk::Object> + IsA<gtk::Widget>>(widget: &W) -> bool {
+    widget.clone().upcast::<gtk::Widget>().downcast::<T>().is_ok()
+}
+```
+
+この関数は次のテストをpassする。
+
+
+```Rust
+#[test]
+fn test_is_a() {
+    let button = gtk::Button::new_with_label("Click me!");
+
+    assert_eq!(is_a::<_, gtk::Container>(&button), true);
+    assert_eq!(is_a::<_, gtk::Label>(&button), false);
+}
+
 ```
 
 ### 参考
