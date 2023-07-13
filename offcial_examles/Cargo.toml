@@ -29,5 +29,10 @@ path = "src/file_chose.rs"
 name = "file_choseb"
 path = "src/file_chose_b.rs"
 
+[[bin]]
+name = "clock"
+path = "src/clock.rs"
+
 [dependencies]
+chrono = "0.4.26"
 gtk = "0.17.1"
