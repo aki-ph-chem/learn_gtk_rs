@@ -54,6 +54,10 @@ fn build_ui(app: &gtk::Application) {
         file_chose_dialog.hide();
     }));
 
+    // Ctrl + o でファイル選択ダイアログを表示
+    let (key, modifier) = gtk::accelerator_parse("<Primary>O");
+    file_chose.add_accelerator("activate", &accel_group, key, modifier, gtk::AccelFlags::VISIBLE);
+
     // open_button, cancle_buttonがクリックされた時の挙動
     file_chose_dialog.connect_response(glib::clone!(@weak text_view => move |fc_dialog, response| {
         if response == gtk::ResponseType::Ok {
