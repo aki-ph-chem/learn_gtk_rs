@@ -18,6 +18,19 @@ fn build_ui(app: &gtk::Application) {
     let text_view: gtk::TextView = builder.object("text_view")
         .expect("Error: text_view");
 
+    // quit: File/Quitのクリックでプログラムを終了
+    let quit: gtk::MenuItem = builder.object("quit")
+        .expect("Error: quit");
+    quit.connect_activate(glib::clone!(@weak window => move |_| {
+        window.close();
+    }));
+
+    // Ctrl + qで終了
+    let accel_group = gtk::AccelGroup::new(); 
+    window.add_accel_group(&accel_group);
+    let (key, modifier) = gtk::accelerator_parse("<Primary>Q");
+    quit.add_accelerator("activate", &accel_group, key, modifier, gtk::AccelFlags::VISIBLE);
+
     // menubar 
     let file_chose: gtk::MenuItem = builder.object("chose_file")
         .expect("Error: chose_file");
@@ -33,6 +46,10 @@ fn build_ui(app: &gtk::Application) {
         file_chose_dialog.run();
         file_chose_dialog.hide();
     }));
+
+    // Ctrl + o でファイル選択ダイアログを表示
+    let (key, modifier) = gtk::accelerator_parse("<Primary>O");
+    file_chose.add_accelerator("activate", &accel_group, key, modifier, gtk::AccelFlags::VISIBLE);
 
     // open_button
     let open_button: gtk::Button = builder.object("open_button")
@@ -63,7 +80,6 @@ fn build_ui(app: &gtk::Application) {
                 .expect("Couldn't get window")
                 .set_text(&contents);
         }
-        fc_dialog.close();
     }));
 
     window.show_all();
