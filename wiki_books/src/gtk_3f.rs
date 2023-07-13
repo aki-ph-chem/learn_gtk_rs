@@ -17,6 +17,12 @@ fn build_ui(app: &gtk::Application) {
     quit.connect_activate(move |_|{
         window_.close();
     });
+    // Ctrl + qで終了
+    let accel_group = gtk::AccelGroup::new();
+    window.add_accel_group(&accel_group);
+    let (key, modifier) = gtk::accelerator_parse("<Primary>Q");
+    quit.add_accelerator("activate", &accel_group, 
+                         key, modifier, gtk::AccelFlags::VISIBLE);
 
     // AbouからAboutDialogが生成される
     let about: gtk::MenuItem = builder.object("about")

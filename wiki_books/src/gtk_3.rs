@@ -1,4 +1,3 @@
-// ただwindowを表示するだけ
 extern crate gtk;
 use gtk::prelude::*;
 use std::error::Error;
@@ -20,6 +19,12 @@ fn main() -> Result<(),Box<dyn Error>> {
     quit.connect_activate(move |_|{
         gtk::main_quit();
     });
+    // Ctrl + qで終了
+    let accel_group = gtk::AccelGroup::new();
+    window.add_accel_group(&accel_group);
+    let (key, modifier) = gtk::accelerator_parse("<Primary>Q");
+    quit.add_accelerator("activate", &accel_group, 
+                         key, modifier, gtk::AccelFlags::VISIBLE);
 
 
     // AbouからAboutDialogが生成される
