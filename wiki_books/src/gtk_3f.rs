@@ -13,8 +13,9 @@ fn build_ui(app: &gtk::Application) {
     // File/Quitをクリックでプログラムを終了
     let quit: gtk::MenuItem = builder.object("quit")
         .expect("Error: quit");
+    let window_ = window.clone();
     quit.connect_activate(move |_|{
-        gtk::main_quit();
+        window_.close();
     });
 
     // AbouからAboutDialogが生成される
