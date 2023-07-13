@@ -51,21 +51,8 @@ fn build_ui(app: &gtk::Application) {
     let (key, modifier) = gtk::accelerator_parse("<Primary>O");
     file_chose.add_accelerator("activate", &accel_group, key, modifier, gtk::AccelFlags::VISIBLE);
 
-    // open_button
-    let open_button: gtk::Button = builder.object("open_button")
-        .expect("Error: open_button"); 
-    open_button.connect_clicked(glib::clone!(@weak file_chose_dialog => move |_| {
-        file_chose_dialog.set_response_sensitive(gtk::ResponseType::Ok, true);
-    }));
-
-    // cancel_button
-    let cancel_button: gtk::Button = builder.object("cancel_button")
-        .expect("Error: cancel_button"); 
-    cancel_button.connect_clicked(glib::clone!(@weak file_chose_dialog => move |_| {
-        file_chose_dialog.set_response_sensitive(gtk::ResponseType::Cancel, true);
-    }));
-
-    // open_button, cancle_buttonがクリックされた時の挙動
+    // open_button, cancle_buttonがクリックされた時の挙動:
+    // Gladeの画面からダイアログ中のOpen,Cancelがクリックされたときの挙動を割り振る
     file_chose_dialog.connect_response(glib::clone!(@weak text_view => move |fc_dialog, response| {
         if response == gtk::ResponseType::Ok {
             let filename = fc_dialog.filename().expect("Couldn't get filename");
