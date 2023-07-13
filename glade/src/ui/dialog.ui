@@ -11,15 +11,25 @@
         <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
-          <object class="GtkButtonBox" id="button_dialog">
+          <object class="GtkButtonBox" id="button_box">
             <property name="can-focus">False</property>
             <property name="homogeneous">True</property>
             <property name="layout-style">end</property>
             <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
+              <object class="GtkButton" id="ok_button">
+                <property name="label" translatable="yes">Ok</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="margin-left">138</property>
+                <property name="margin-top">63</property>
+                <property name="margin-bottom">25</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
             </child>
           </object>
           <packing>
@@ -47,10 +57,10 @@
           <object class="GtkEntry" id="entry">
             <property name="visible">True</property>
             <property name="can-focus">True</property>
-            <property name="margin-left">78</property>
-            <property name="margin-right">80</property>
-            <property name="margin-top">83</property>
-            <property name="margin-bottom">89</property>
+            <property name="margin-left">16</property>
+            <property name="margin-right">61</property>
+            <property name="margin-top">119</property>
+            <property name="margin-bottom">101</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -60,10 +70,14 @@
         </child>
         <child>
           <object class="GtkButton" id="button">
-            <property name="label" translatable="yes">button</property>
+            <property name="label" translatable="yes">say!</property>
             <property name="visible">True</property>
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
+            <property name="margin-left">48</property>
+            <property name="margin-right">63</property>
+            <property name="margin-top">109</property>
+            <property name="margin-bottom">86</property>
           </object>
           <packing>
             <property name="expand">False</property>

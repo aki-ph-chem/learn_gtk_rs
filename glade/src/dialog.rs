@@ -22,14 +22,11 @@ fn main() -> Result<(), Box<dyn Error>> {
     let dialog: gtk::MessageDialog = builder.object("dialog")
         .expect("Error: dialog");
 
-    // ちょっとこのへんの挙動がおかしい
     button.connect_clicked(move |_| {
         let message = format!("Text: {},", entry.text());
         dialog.set_text(Some(&message));
         dialog.run();
-        unsafe {
-            dialog.destroy();
-        }
+        dialog.hide();
     });
 
     window.show_all();
