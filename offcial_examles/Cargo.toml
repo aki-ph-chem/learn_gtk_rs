@@ -25,5 +25,9 @@ path = "src/refcell_rc.rs"
 name = "file_chose"
 path = "src/file_chose.rs"
 
+[[bin]]
+name = "file_choseb"
+path = "src/file_chose_b.rs"
+
 [dependencies]
 gtk = "0.17.1"
