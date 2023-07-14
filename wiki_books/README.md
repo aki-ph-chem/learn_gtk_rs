@@ -1,5 +1,25 @@
 # Wiki Books,ZetCode の GTK+のC言語のサンプルをRustで
 
+## Contents
+
+このディレクトリである`wiki_books`に含まれるソースコードの説明。
+あるコードが`<src_name>.rs`であった場合、実行するには
+
+```bash
+$ cargo run --bin <src_name>
+```
+
+を実行すれば良い。
+またGladeによって生成された、UIを構成しているXMLファイルは`ui`ディレクトリ下に存在する。
+
+1. gtk\_1.rs: ボタン,labelの実装されたwindowを表示するだけのプログラム
+2. gtk\_1f.rs: gtk\_1.rsのUI構築処理をbuilderで実装したもの 
+3. gtk\_1fq.rs: gtk\_1.rsにボタンのクリックor Ctrl + oで終了する処理を実装したもの
+4. gtk\_2.rs: main()からlabelの内容を変更する
+5. gtk\_2f.rs: gtk\_2.rsのUI構築処理をbuilderで実装したもの
+5. gtk\_3.rs: メニュバーを実装し、Help/Aboutのクリックで、Aboutダイアログが表示され、File/Quitのクリックor Ctrl + qで終了する 
+5. gtk\_3f.rs: gtk\_3.rsのUI構築処理をbuilderで実装したもの
+
 ## Windowのサイズ
 
 Gladeで`GtkWindow`が選択された状態で、右側の画面で`Appearance`の`Default Width`,`Default Height`の数値を設定すれば良い。
