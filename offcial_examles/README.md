@@ -2,6 +2,26 @@
 
 公式のチュートリアルを読んで内容を日本語でまとめる。
 
+## Contents
+
+このディレクトリである`wiki_books`に含まれるソースコードの説明。
+あるコードが`<src_name>.rs`であった場合、実行するには
+
+```bash
+$ cargo run --bin <src_name>
+```
+
+を実行すれば良い。
+またGladeによって生成された、UIを構成しているXMLファイルは`ui`ディレクトリ下に存在する。
+
+1. button\_inc.rs: ボタンをクリックして表示される数値を変化させる。
+2. file\_chose.rs: テキストファイルを選択して内容をwindow内に表示する。
+3. file\_chose\_b.rs: テキストファイルを選択して内容をwindow内に表示する。ただし、ボタンの実装はGlade側ではなくソースコード側
+4. grid.rs: window内にgridを置き、その上にボタンを配置し、イベントを実装した。 
+5. use\_clone.rs: clone()!マクロを使う。実装した内容はbutton\_inc.rsと同じ。
+6. refcell\_rc.rs: スマートポインタ Rc,RefCellを使う。
+7. clock.rs: window上に時間を表示する。
+
 ## Callbackとクロージャー 
 
 ### コールバックとクロージャー
