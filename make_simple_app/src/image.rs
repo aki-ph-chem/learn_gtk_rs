@@ -53,10 +53,20 @@ fn build_ui(app: &gtk::Application) {
                                key, modifier, gtk::AccelFlags::VISIBLE);
 
     // 画像を表示する
-    let path_to_image = "pet_cat_sit.png"; // いらすとやにあった猫の絵
+    let path_to_image = "cat/pet_cat_sit.png"; // いらすとやにあった猫の絵
     let image: gtk::Image = builder.object("image")
         .expect("Error: image");
     image.set_file(Some(path_to_image));
+
+    // 選択ダイアログ中のOpenをクリックで画像を開く
+    file_chose_dialog.connect_response(glib::clone!(@weak image => move |fc_dialog, response| {
+        if response == gtk::ResponseType::Ok {
+            if let Some(path_to_image) = fc_dialog.filename()
+                .expect("Couldn't get filename").to_str() {
+                image.set_file(Some(path_to_image));
+            }
+        }
+    }));
 
     window.show_all();
 }
