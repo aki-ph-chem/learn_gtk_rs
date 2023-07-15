@@ -59,8 +59,8 @@
   </object>
   <object class="GtkWindow" id="window">
     <property name="can-focus">False</property>
-    <property name="default-width">400</property>
-    <property name="default-height">400</property>
+    <property name="default-width">350</property>
+    <property name="default-height">250</property>
     <child>
       <object class="GtkBox" id="vbox">
         <property name="visible">True</property>
@@ -224,37 +224,23 @@
           </packing>
         </child>
         <child>
-          <object class="GtkBox" id="hbox">
+          <object class="GtkScrolledWindow" id="scroll">
             <property name="visible">True</property>
-            <property name="can-focus">False</property>
+            <property name="can-focus">True</property>
+            <property name="margin-top">3</property>
+            <property name="shadow-type">in</property>
             <child>
-              <object class="GtkImage" id="image">
+              <object class="GtkViewport" id="view">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="margin-left">212</property>
-                <property name="margin-right">192</property>
-                <property name="margin-top">1</property>
-                <property name="stock">gtk-missing-image</property>
-                <property name="icon_size">0</property>
+                <child>
+                  <object class="GtkImage" id="image">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="stock">gtk-missing-image</property>
+                  </object>
+                </child>
               </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkScrollbar" id="scroll">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="orientation">vertical</property>
-                <property name="fill-level">5.8632766878171544e+220</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
             </child>
           </object>
           <packing>
@@ -265,16 +251,14 @@
         </child>
         <child>
           <object class="GtkButton" id="button">
-            <property name="label" translatable="yes">quit</property>
+            <property name="label" translatable="yes">quite</property>
             <property name="visible">True</property>
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
-            <property name="image-position">top</property>
           </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="padding">5</property>
             <property name="position">2</property>
           </packing>
         </child>

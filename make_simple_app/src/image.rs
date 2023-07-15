@@ -35,7 +35,7 @@ fn build_ui(app: &gtk::Application) {
 
     // File/Open
     let file_chose: gtk::MenuItem = builder.object("file_chose")
-        .expect("Error: open");
+        .expect("Error: file_chose");
     // file_chose_dialog
     let file_chose_dialog: gtk::FileChooserDialog = 
         builder.object("file_chose_dialog").expect("Error: file_chose_dialog");
