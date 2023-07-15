@@ -9,5 +9,9 @@ edition = "2021"
 name = "image"
 path = "src/image.rs"
 
+[[bin]]
+name = "image_cmd"
+path = "src/image_cmd.rs"
+
 [dependencies]
 gtk = "0.17.1"
