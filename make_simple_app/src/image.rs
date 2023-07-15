@@ -2,7 +2,8 @@ extern crate gtk;
 use gtk::prelude::*;
 use gtk::glib;
 
-fn build_ui(app: &gtk::Application) { let ui = include_str!("ui/image.ui");
+fn build_ui(app: &gtk::Application) { 
+    let ui = include_str!("ui/image.ui");
     let builder = gtk::Builder::from_string(ui);
 
     // window
