@@ -33,6 +33,18 @@ fn build_ui(app: &gtk::Application) {
     file_quit.add_accelerator("activate", &accel_group, 
                               key, modifier, gtk::AccelFlags::VISIBLE);
 
+    // Help/About
+    let help_about: gtk::MenuItem = builder.object("help_about")
+        .expect("Error: help_about");
+    // Aboutdialog
+    let about_dialog: gtk::AboutDialog = builder.object("about_dialog")
+        .expect("Error: aoubt_dialog");
+    help_about.connect_activate(glib::clone!(@weak window, @weak about_dialog => move |_| {
+        about_dialog.run();
+        about_dialog.set_transient_for(Some(&window));
+        about_dialog.hide();
+    }));
+
     // File/Open
     let file_chose: gtk::MenuItem = builder.object("file_chose")
         .expect("Error: file_chose");
