@@ -13,5 +13,9 @@ path = "src/image.rs"
 name = "image_cmd"
 path = "src/image_cmd.rs"
 
+[[bin]]
+name = "image_event"
+path = "src/image_event.rs"
+
 [dependencies]
 gtk = "0.17.1"
