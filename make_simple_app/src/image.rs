@@ -86,7 +86,8 @@ fn build_ui(app: &gtk::Application) {
     file_chose_dialog.connect_response(glib::clone!(@weak image, @weak window  => move |fc_dialog, response| {
         if response == gtk::ResponseType::Ok {
             if let Some(path_to_image) = fc_dialog.filename(){
-                let pix_buf = Pixbuf::from_file(path_to_image);
+                let pix_buf = Pixbuf::from_file_at_scale(path_to_image, 
+                                                450, 450, true);
                     match pix_buf {
                         Ok(p) => image.set_pixbuf(Some(&p)),
                         Err(err) => { 
