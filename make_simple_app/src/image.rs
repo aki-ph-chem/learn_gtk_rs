@@ -69,14 +69,33 @@ fn build_ui(app: &gtk::Application) {
     let image: gtk::Image = builder.object("image")
         .expect("Error: image");
 
+    // エラーダイアログ
+    let error_dialog: gtk::MessageDialog = builder.object("error_dialog")
+        .expect("Error: error_dialog");
+    // エラーメッセージ用のラベル
+    let error_label: gtk::Label = builder.object("error_label")
+        .expect("Error: error_label");
+    // エラーダイアログ中のボタン
+    let error_button: gtk::Button = builder.object("error_button")
+        .expect("Error: error_button");
+    error_button.connect_clicked(glib::clone!(@weak error_dialog => move|_| {
+        error_dialog.hide();
+    }));
+
     // 選択ダイアログ中のOpenをクリックで画像を開く
-    file_chose_dialog.connect_response(glib::clone!(@weak image => move |fc_dialog, response| {
+    file_chose_dialog.connect_response(glib::clone!(@weak image, @weak window  => move |fc_dialog, response| {
         if response == gtk::ResponseType::Ok {
             if let Some(path_to_image) = fc_dialog.filename(){
                 let pix_buf = Pixbuf::from_file(path_to_image);
                     match pix_buf {
                         Ok(p) => image.set_pixbuf(Some(&p)),
-                        Err(err) => eprintln!("Error: {:?}", err),
+                        Err(err) => { 
+                            eprintln!("Error: {:?}", err);
+                            error_label.set_label(&err.to_string());
+                            error_dialog.set_title("Error");
+                            error_dialog.set_transient_for(Some(&window));
+                            error_dialog.run();
+                        },
                     };
                 }
         }
