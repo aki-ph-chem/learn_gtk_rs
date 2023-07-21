@@ -26,6 +26,10 @@ name = "gtk_2f"
 path = "src/gtk_2f.rs"
 
 [[bin]]
+name = "gtk_2f_arg"
+path = "src/gtk_2f_arg.rs"
+
+[[bin]]
 name = "gtk_3"
 path = "src/gtk_3.rs"
 
