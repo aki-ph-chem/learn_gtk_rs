@@ -17,5 +17,10 @@ path = "src/image_cmd.rs"
 name = "image_event"
 path = "src/image_event.rs"
 
+# GtkDrawingAreaを使う
+[[bin]]
+name = "drawing_area"
+path="src/image_drawingarea.rs"
+
 [dependencies]
 gtk = "0.17.1"
